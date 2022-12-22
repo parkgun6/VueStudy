@@ -49,7 +49,7 @@ export default {
     </b-modal>
     <button @click="statusChange">modalTest</button>
     <ModalComp v-bind:title="title" v-bind:msg="msg" v-bind:status="status" />
-    <br />기본모달: {{ modal }} <br />유저아이디: {{ userId }} <br />부모상태:
+    <br />유저아이디: {{ userId }} <br />부모상태:
     {{ status }}
   </div>
 </template>

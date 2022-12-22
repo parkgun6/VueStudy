@@ -6,22 +6,21 @@ export default {
       this.modal = this.status;
     },
   },
-  watch: {
-    modal() {
-      if (this.modal === true) {
-        this.modal = false;
-        console.log('aaaa');
-      }
+  methods: {
+    changeModal() {
+      this.modal = true;
     },
   },
   data() {
     return {
-      modal: this.status,
+      modal: false,
+      test: 'show',
     };
   },
 };
 </script>
 <template>
-  <b-button @click="modal = true">asdasd</b-button>
+  <button @click="changeModal"></button>
   <b-modal v-model="modal" v-bind:title="title" ok-only />
+  <br />자식모달: {{ status }}
 </template>
