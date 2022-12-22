@@ -1,3 +1,43 @@
+<script>
+import Todo from './components/Todo.vue';
+
+export default {
+  name: 'app',
+  components: { Todo },
+  data() {
+    return {
+      userInput: '',
+      todoList: [],
+      currentState: 'active',
+    };
+  },
+  computed: {
+    // getter함수처럼 동작
+    activeTodoList() {
+      return this.todoList.filter(
+        (todo) =>
+          this.currentState === 'all' || todo.state === this.currentState
+      );
+    },
+  },
+  methods: {
+    changeCurrentState(state) {
+      this.currentState = state;
+    },
+    addNewTodo() {
+      this.todoList.push({
+        label: this.userInput,
+        state: 'active',
+      });
+      this.userInput = '';
+    },
+    toggleTodoState(todo) {
+      todo.state = todo.state === 'active' ? 'done' : 'active';
+    },
+  },
+};
+</script>
+
 <template>
   <div id="app">
     <div class="container">
@@ -42,45 +82,3 @@
     </div>
   </div>
 </template>
-<script>
-import Todo from "./components/Todo.vue";
-export default {
-  name: "app",
-  components: {},
-  data() {
-    return {
-      userInput: "",
-      todoList: [],
-      currentState: "active",
-      
-    };
-  },
-  computed: {
-    // getter함수처럼 동작
-    activeTodoList() {
-      return this.todoList.filter(
-        (todo) =>
-          this.currentState === "all" || todo.state === this.currentState
-      );
-    },
-  },
-  methods: {
-    changeCurrentState(state) {
-      this.currentState = state;
-    },
-    addNewTodo() {
-      this.todoList.push({
-        label: this.userInput,
-        state: "active",
-      });
-      this.userInput = "";
-    },
-    toggleTodoState(todo) {
-      todo.state = todo.state === "active" ? "done" : "active";
-    },
-  },
-  components: {
-    Todo
-  }
-};
-</script>

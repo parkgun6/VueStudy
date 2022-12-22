@@ -1,14 +1,14 @@
 <template>
-  <button class="list-group-item text-left" @click="clickButton">
+  <button class="list-group-item text-right" @click="clickButton">
     {{ label }}
   </button>
 </template>
 <script>
 export default {
-  props: ["label"],
+  props: ['label'],
   methods: {
     clickButton() {
-      this.$emit("componentClick");
+      this.$emit('componentClick');
     },
   },
 };
