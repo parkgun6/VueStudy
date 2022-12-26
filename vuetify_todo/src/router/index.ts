@@ -8,11 +8,11 @@ const routes = [
   },
   {
     path: "/modal-test",
-    component: () => import("@/components/ModalTest.vue"),
+    component: () => import("@/components/Modal.vue"),
   },
   {
     path: "/todo-list",
-    component: () => import("@/components/TodoList.vue"),
+    component: () => import("@/components/Todo/TodoList.vue"),
   },
 ];
 

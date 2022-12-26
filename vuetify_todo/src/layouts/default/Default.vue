@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <default-bar />
+    <RouterView />
     <default-view />
   </v-app>
 </template>
