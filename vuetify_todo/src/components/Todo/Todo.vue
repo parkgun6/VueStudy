@@ -36,7 +36,7 @@ export default {
         <template v-slot:prepend>
           <v-icon :icon="item.icon"></v-icon>
         </template>
-        <v-list-item-title> <div v-text="item.text"></div></v-list-item-title>
+        <v-list-item-title><div v-text="item.text"></div></v-list-item-title>
       </v-list-item>
     </v-list>
   </v-card>
