@@ -12,7 +12,7 @@ const routes = [
   },
   {
     path: "/todo-list",
-    component: () => import("@/components/Todo/TodoList.vue"),
+    component: () => import("@/components/Todo/TodoMain.vue"),
   },
 ];
 

@@ -1,49 +1,44 @@
 <script>
-// import Modal from "@/components/Modal.vue";
-import Guest from "@/components/Todo/Guest.vue";
-import LoginModal from "@/components/Todo/LoginModal.vue";
-import Todo from "@/components/Todo/Todo.vue";
+import { useTodoStore } from "@/store";
+import { storeToRefs } from "pinia";
 
 export default {
-  components: { Guest, LoginModal, Todo },
-  data() {
-    return {
-      todo: "",
-      userId: "",
-    };
-  },
-  methods: {
-    consoleMsg(userId) {
-      console.log(userId);
-      this.userId = userId;
-    },
+  data: () => ({
+    items: [
+      { userId: "", text: "Real-Time", icon: "mdi-clock" },
+      { userId: "", text: "Audience", icon: "mdi-account" },
+    ],
+  }),
+  setup() {
+    const todoStore = useTodoStore();
+    const todoList = storeToRefs(todoStore);
+    console.log(todoList);
+    return todoList;
   },
 };
 </script>
-
 <template>
-  <v-card>
-    <v-card
-      class="d-flex"
-      text="T O D O L I S T"
-      variant="outlined"
-      flex="6"
-      min-height="60px"
-      max-height="60px"
-    >
-      <!-- <Modal @catchUserId="consoleMsg" /> -->
-      <LoginModal @catchUserId="consoleMsg" />
-    </v-card>
-    <v-card v-if="this.userId">
-      <v-card-text>
-        <Guest :userId="this.userId" />
-      </v-card-text>
-      <v-card-text>
-        <v-text-field v-model="todo" label="New Todo" hide-details="true" />
-      </v-card-text>
-      <div>
-        <Todo />
-      </div>
-    </v-card>
+  <v-card class="mx-auto pa-4">
+    <v-list>
+      <v-list-subheader>T O D O S</v-list-subheader>
+      <v-list-item
+        v-for="(item, i) in todoList"
+        :key="i"
+        :value="item"
+        active-color="primary"
+        rounded="xl"
+      >
+        <template v-slot:prepend>
+          <v-icon :icon="item.icon"></v-icon>
+        </template>
+        <v-list-item-title> <div v-text="item.todo"></div></v-list-item-title>
+      </v-list-item>
+    </v-list>
   </v-card>
 </template>
+
+<style scoped>
+.foo {
+  padding-bottom: 75px;
+}
+</style>

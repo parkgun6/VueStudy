@@ -1,6 +1,7 @@
 <script>
+import { useUserIdStore } from "@/store";
+
 export default {
-  emits: ["catchUserId"],
   mounted() {
     // 최초 렌더링시 실행되는 함수
     this.login();
@@ -12,6 +13,8 @@ export default {
   },
   methods: {
     login() {
+      const userIdPinia = useUserIdStore();
+
       this.$swal.fire("Please Input Your UserID");
       this.$swal
         .fire({
@@ -26,7 +29,8 @@ export default {
           confirmButtonText: "L O G I N",
           preConfirm: (userId) => {
             this.userId = userId;
-            this.$emit("catchUserId", userId);
+            userIdPinia.setUserId(this.userId);
+            console.log(userIdPinia.getUserId);
           },
         })
         .then((result) => {
@@ -43,7 +47,16 @@ export default {
 </script>
 
 <template>
-  <v-card-actions>
-    <v-btn variant="outlined" @click="this.login"> USER ID </v-btn>
-  </v-card-actions>
+  <v-card
+    class="d-flex"
+    text="T O D O L I S T"
+    variant="outlined"
+    flex="6"
+    min-height="60px"
+    max-height="60px"
+  >
+    <v-card-actions>
+      <v-btn variant="outlined" @click="this.login"> USER ID </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>

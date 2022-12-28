@@ -1,9 +1,7 @@
 <template>
   <v-app>
     <default-bar />
-    <v-card>
-      <RouterView />
-    </v-card>
+    <RouterView />
     <default-view />
   </v-app>
 </template>
