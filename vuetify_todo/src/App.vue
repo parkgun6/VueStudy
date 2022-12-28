@@ -1,9 +1,7 @@
 <template>
-  <div class="d-flex justify-center MainContent">
-    <v-card aspect-ratio="16 / 9" class="border">
-      <DefaultVue />
-    </v-card>
-  </div>
+  <v-card aspect-ratio="16 / 9" class="border">
+    <DefaultVue />
+  </v-card>
 </template>
 
 <script lang="ts" setup>
@@ -34,15 +32,14 @@ body {
 #app .MainContent {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  margin: 0 auto;
+  height: 630px;
+  overflow: auto;
 }
 
 #app .Content {
   overflow: auto;
   width: 100%;
   height: 100%;
-  background-color: floralwhite;
 }
 /* //layout */
 
@@ -50,26 +47,26 @@ body {
 
 /* Tablet(768 - 1024) */
 @media screen and (max-width: 1024px) {
-  #root {
+  #app {
     width: 100%;
   }
 }
 @media screen and (max-width: 768px) {
-  #root {
+  #app {
     width: 375px;
   }
 }
 
 /* Mobile(375 - 450) */
 @media screen and (max-width: 450px) {
-  #root {
+  #app {
     width: 100%;
   }
 }
 
 /* Mobile(375) */
 @media screen and (max-width: 375px) {
-  #root {
+  #app {
     width: 100%;
     min-width: 320px;
   }

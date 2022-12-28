@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card max-height="50px" fixed>
     <v-tabs class="bg-indigo-lighten-1 text-center d-flex flex-column">
       <router-link to="/" class="fontColorWhite">
         <v-tab value="one"> HOME </v-tab>

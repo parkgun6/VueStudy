@@ -23,23 +23,27 @@ export default {
 
 <template>
   <v-card>
-    <v-card class="d-flex" text="T O D O L I S T" variant="outlined" flex="6">
+    <v-card
+      class="d-flex"
+      text="T O D O L I S T"
+      variant="outlined"
+      flex="6"
+      min-height="60px"
+      max-height="60px"
+    >
       <!-- <Modal @catchUserId="consoleMsg" /> -->
       <LoginModal @catchUserId="consoleMsg" />
     </v-card>
-    <v-card
-      v-if="this.userId"
-      v-scroll.self="onScroll"
-      class="overflow-y-auto"
-      min-height="100% - 90px"
-    >
+    <v-card v-if="this.userId">
       <v-card-text>
         <Guest :userId="this.userId" />
       </v-card-text>
       <v-card-text>
-        <v-text-field v-model="todo" label="New Todo" required></v-text-field>
+        <v-text-field v-model="todo" label="New Todo" hide-details="true" />
       </v-card-text>
-      <Todo />
+      <div>
+        <Todo />
+      </div>
     </v-card>
   </v-card>
 </template>
