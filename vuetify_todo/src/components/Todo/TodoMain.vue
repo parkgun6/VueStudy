@@ -5,10 +5,9 @@ import LoginModal from "@/components/Todo/LoginModal.vue";
 import TodoList from "@/components/Todo/TodoList.vue";
 import { useUserIdStore } from "@/store";
 import { storeToRefs } from "pinia";
-import TodoInput from "./TodoInput.vue";
 
 export default {
-  components: { Guest, LoginModal, TodoList, TodoInput },
+  components: { Guest, LoginModal, TodoList },
   setup() {
     const userIdStore = useUserIdStore();
     const userId = storeToRefs(userIdStore);
@@ -30,7 +29,7 @@ export default {
       <v-card-text>
         <Guest :userId="this.userId" />
       </v-card-text>
-      <TodoInput :userId="this.userId" />
+
       <TodoList />
     </v-card>
   </v-card>

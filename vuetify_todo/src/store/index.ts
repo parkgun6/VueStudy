@@ -20,7 +20,7 @@ export const useUserIdStore = defineStore("userId", {
 });
 
 export const useTodoStore = defineStore("todo", {
-  state: () => {
+  state: (): { todoList: Array<object> } => {
     return {
       todoList: [],
     };
