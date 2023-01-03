@@ -1,63 +1,65 @@
 <script>
-import { useTodoStore } from "@/store";
+import { useTodoStore } from '@/store';
 
 export default {
-  props: ["userId"],
+  props: ['userId'],
   data() {
     return {
-      todo: "",
-      state: "start",
-      icon: "mdi-account",
+      todo: '',
+      state: 'start',
+      icon: 'mdi-account',
     };
   },
   methods: {
     async newTodoModalOpen() {
       const { value: title } = await this.$swal.fire({
-        title: "Enter Todo Title",
-        input: "text",
+        title: 'Enter Todo Title',
+        input: 'text',
         showCancelButton: true,
         inputValidator: (value) => {
           if (!value) {
-            return "You need to write Title!";
+            return 'You need to write Title!';
           }
         },
       });
       const { value: todo } = await this.$swal.fire({
-        input: "textarea",
-        inputLabel: "Message",
-        inputPlaceholder: "Type your message here...",
+        input: 'textarea',
+        inputLabel: 'Message',
+        inputPlaceholder: 'Type your message here...',
         inputAttributes: {
-          "aria-label": "Type your message here",
+          'aria-label': 'Type your message here',
         },
         showCancelButton: true,
       });
       const { value: priority } = await this.$swal.fire({
-        title: "Select Priority",
-        input: "select",
+        title: 'Select Priority',
+        input: 'select',
         inputOptions: {
-          First: "1st",
-          Second: "2nd",
-          Third: "3rd",
-          Fourth: "4th",
-          FifTh: "5th",
+          first: '1st',
+          second: '2nd',
+          third: '3rd',
+          fourth: '4th',
+          fifth: '5th',
         },
-        inputPlaceholder: "Select Priority",
+        inputPlaceholder: 'title',
         showCancelButton: true,
       });
-      if ((title, todo, priority)) {
-        this.$swal.fire(title, todo, priority);
-      }
+      console.log(`${title},${todo},${priority}`);
+      const todolist = { title, todo, priority };
+      console.log(todolist);
+      this.addTodo(todolist);
     },
-    addTodo() {
+    addTodo(todolist) {
       const todoStore = useTodoStore();
       const obj = {
         userId: this.userId,
-        todo: this.todo,
-        state: this.state,
-        icon: this.icon,
+        title: todolist.title,
+        todo: todolist.todo,
+        priority: todolist.priority,
       };
+      console.log(todolist);
       todoStore.addTodo(obj);
-      this.todo = "";
+      this.todo = '';
     },
   },
 };

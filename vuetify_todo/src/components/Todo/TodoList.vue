@@ -1,12 +1,12 @@
 <script>
-import { useTodoStore } from "@/store";
-import { storeToRefs } from "pinia";
+import { useTodoStore } from '@/store';
+import { storeToRefs } from 'pinia';
 
 export default {
   data: () => ({
     items: [
-      { userId: "", text: "Real-Time", icon: "mdi-clock" },
-      { userId: "", text: "Audience", icon: "mdi-account" },
+      { userId: '', text: 'Real-Time', icon: 'mdi-clock' },
+      { userId: '', text: 'Audience', icon: 'mdi-account' },
     ],
   }),
   setup() {
@@ -26,19 +26,30 @@ export default {
         :key="i"
         :value="item"
         active-color="primary"
-        rounded="xl"
+        rounded="shaped"
+        class="mt-1"
+        v-bind:class="item.priority"
       >
-        <template v-slot:prepend>
-          <v-icon :icon="item.icon"></v-icon>
-        </template>
-        <v-list-item-title> <div v-text="item.todo"></div></v-list-item-title>
+        {{ item.title }}
       </v-list-item>
     </v-list>
   </v-card>
 </template>
 
 <style scoped>
-.foo {
-  padding-bottom: 75px;
+.first {
+  background-color: rgba(255, 59, 59, 0.726);
+}
+.second {
+  background-color: rgba(253, 189, 70, 0.87);
+}
+.third {
+  background-color: rgba(58, 212, 58, 0.815);
+}
+.fourth {
+  background-color: rgba(126, 126, 253, 0.801);
+}
+.fifth {
+  background-color: rgba(128, 128, 128, 0.644);
 }
 </style>

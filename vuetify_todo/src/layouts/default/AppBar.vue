@@ -2,13 +2,13 @@
   <v-card max-height="50px" fixed>
     <v-tabs class="bg-indigo-lighten-1 text-center d-flex flex-column">
       <router-link to="/" class="fontColorWhite">
-        <v-tab value="one"> HOME </v-tab>
+        <v-tab> HOME </v-tab>
       </router-link>
       <!-- <router-link to="/modal-test" class="fontColorWhite">
         <v-tab value="two"> MODAL </v-tab>
       </router-link> -->
       <router-link to="/todo-list" class="fontColorWhite">
-        <v-tab value="three">TODO</v-tab>
+        <v-tab>TODO</v-tab>
       </router-link>
     </v-tabs>
   </v-card>
