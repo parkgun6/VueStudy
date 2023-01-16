@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     async newTodoModalOpen() {
-      const { value: title } = await this.$swal.fire({
+      const title = await this.$swal.fire({
         title: 'Enter Todo Title',
         input: 'text',
         showCancelButton: true,
@@ -22,6 +22,11 @@ export default {
           }
         },
       });
+      if (title.dismiss === 'backdrop' || title.dismiss === 'cancel') {
+        console.log('cancel or backdrop');
+        return;
+      }
+      console.log('abc');
       const { value: todo } = await this.$swal.fire({
         input: 'textarea',
         inputLabel: 'Message',
@@ -30,10 +35,13 @@ export default {
           'aria-label': 'Type your message here',
         },
         showCancelButton: true,
+        allowOutsideClick: false,
       });
-      const { value: priority } = await this.$swal.fire({
-        title: 'Select Priority',
+      const { value: Importance } = await this.$swal.fire({
+        title: 'Select Importance',
+        icon: 'question',
         input: 'select',
+        inputValue: 'first',
         inputOptions: {
           first: '1st',
           second: '2nd',
@@ -41,24 +49,20 @@ export default {
           fourth: '4th',
           fifth: '5th',
         },
-        inputPlaceholder: 'title',
-        showCancelButton: true,
+        allowOutsideClick: false,
       });
-      console.log(`${title},${todo},${priority}`);
-      const todolist = { title, todo, priority };
-      console.log(todolist);
+      const todolist = { title: title.value, todo, Importance };
       this.addTodo(todolist);
     },
     addTodo(todolist) {
       const todoStore = useTodoStore();
       const obj = {
-        userId: this.userId,
+        // userId: this.userId,
         title: todolist.title,
         todo: todolist.todo,
-        priority: todolist.priority,
+        Importance: todolist.Importance,
       };
-      console.log(todolist);
-      todoStore.addTodo(obj);
+      todoStore.addTodo(this.userId, obj);
       this.todo = '';
     },
   },

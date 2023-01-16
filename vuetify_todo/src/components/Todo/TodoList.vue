@@ -1,19 +1,39 @@
 <script>
 import { useTodoStore } from '@/store';
 import { storeToRefs } from 'pinia';
+import { onMounted, getCurrentInstance } from 'vue';
 
 export default {
-  data: () => ({
-    items: [
-      { userId: '', text: 'Real-Time', icon: 'mdi-clock' },
-      { userId: '', text: 'Audience', icon: 'mdi-account' },
-    ],
-  }),
+  props: ['userId'],
+  data() {
+    return {
+      todoList: [],
+    };
+  },
+  watch: {
+    userId(newUserId, oldUserId) {
+      console.log(this.userId);
+      console.log(this.todoList);
+      this.getTodoList();
+    },
+  },
+  methods: {
+    getTodoList() {
+      const todoStore = useTodoStore();
+      const todoList = todoStore.getTodoList(this.userId);
+      console.log(todoList);
+      this.todoList = todoList;
+      return todoList;
+    },
+  },
   setup() {
-    const todoStore = useTodoStore();
-    const todoList = storeToRefs(todoStore);
-    console.log(todoList);
-    return todoList;
+    onMounted(() => {
+      // const todoStore = useTodoStore();
+      // const todoList = todoStore.getTodoList(getCurrentInstance().props.userId);
+      // console.log(todoList);
+      // getCurrentInstance().data.todoList = todoList;
+      // return todoList;
+    });
   },
 };
 </script>
@@ -21,17 +41,18 @@ export default {
   <v-card class="mx-auto pa-4">
     <v-list>
       <v-list-subheader>T O D O S</v-list-subheader>
-      <v-list-item
-        v-for="(item, i) in todoList"
-        :key="i"
-        :value="item"
-        active-color="primary"
-        rounded="shaped"
-        class="mt-1"
-        v-bind:class="item.priority"
-      >
-        {{ item.title }}
-      </v-list-item>
+      <v-card height="400px">
+        <v-list-item
+          v-for="(item, i) in todoList"
+          :key="i"
+          :value="item"
+          rounded="shaped"
+          class="mt-1"
+          v-bind:class="item.Importance"
+        >
+          {{ item.title }}
+        </v-list-item>
+      </v-card>
     </v-list>
   </v-card>
 </template>
@@ -51,5 +72,8 @@ export default {
 }
 .fifth {
   background-color: rgba(128, 128, 128, 0.644);
+}
+.v-card {
+  overflow-y: auto;
 }
 </style>

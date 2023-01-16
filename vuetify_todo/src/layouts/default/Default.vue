@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <default-bar />
+    <!-- <v-card height="calc(100vh - 135px)"> -->
     <routerView />
+    <!-- </v-card> -->
     <default-view />
   </v-app>
 </template>

@@ -1,10 +1,10 @@
 <script>
 // import Modal from "@/components/Modal.vue";
-import Guest from "@/components/Todo/Guest.vue";
-import LoginModal from "@/components/Todo/LoginModal.vue";
-import TodoList from "@/components/Todo/TodoList.vue";
-import { useUserIdStore } from "@/store";
-import { storeToRefs } from "pinia";
+import Guest from '@/components/Todo/Guest.vue';
+import LoginModal from '@/components/Todo/LoginModal.vue';
+import TodoList from '@/components/Todo/TodoList.vue';
+import { useUserIdStore } from '@/store';
+import { storeToRefs } from 'pinia';
 
 export default {
   components: { Guest, LoginModal, TodoList },
@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      todo: "",
+      todo: '',
     };
   },
   methods: {},
@@ -29,8 +29,7 @@ export default {
       <v-card-text>
         <Guest :userId="this.userId" />
       </v-card-text>
-
-      <TodoList />
+      <TodoList :userId="this.userId" />
     </v-card>
   </v-card>
 </template>

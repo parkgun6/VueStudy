@@ -1,5 +1,5 @@
 <script>
-import { useUserIdStore } from "@/store";
+import { useUserIdStore } from '@/store';
 
 export default {
   mounted() {
@@ -8,37 +8,41 @@ export default {
   },
   data() {
     return {
-      userId: "",
+      userId: '',
     };
   },
   methods: {
     login() {
       const userIdPinia = useUserIdStore();
-
-      this.$swal.fire("Please Input Your UserID");
+      this.$swal.fire('Please Input Your UserID');
       this.$swal
         .fire({
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
-          title: "Please Input Your UserId",
-          input: "text",
-          confirmButtonText: "L O G I N",
+          title: 'Please Input Your UserId',
+          input: 'text',
+          confirmButtonText: 'L O G I N',
+          inputValidator: (value) => {
+            if (!value) {
+              return 'You need to write UserId!';
+            }
+          },
           preConfirm: (userId) => {
             this.userId = userId;
             userIdPinia.setUserId(this.userId);
-            console.log(userIdPinia.getUserId);
+            // console.log(userIdPinia.getUserId);
           },
         })
         .then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            this.$swal.fire("W E L C O M E!", this.userId, "success");
+            this.$swal.fire('W E L C O M E!', this.userId, 'success');
           } else if (result.isDenied) {
-            this.$swal.fire("Changes are not saved", "", "info");
+            this.$swal.fire('Changes are not saved', '', 'info');
           }
         });
     },

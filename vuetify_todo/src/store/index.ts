@@ -1,11 +1,11 @@
 // Utilities
-import { createPinia, defineStore } from "pinia";
+import { createPinia, defineStore } from 'pinia';
 
 export default createPinia();
 
-export const useUserIdStore = defineStore("userId", {
+export const useUserIdStore = defineStore('userId', {
   state: () => {
-    return { userId: "" };
+    return { userId: '' };
   },
   getters: {
     getUserId(): string {
@@ -19,21 +19,29 @@ export const useUserIdStore = defineStore("userId", {
   },
 });
 
-export const useTodoStore = defineStore("todo", {
-  state: (): { todoList: Array<object> } => {
+export const useTodoStore = defineStore('todo', {
+  state: (): { todoList: Array<object>; userId: string } => {
     return {
       todoList: [],
+      userId: '',
     };
   },
-  getters: {
-    getTodoList(): Array<object> {
-      return this.todoList;
-    },
-  },
+  getters: {},
   actions: {
-    addTodo(todo: object) {
-      console.log(todo);
+    addTodo(userId: string, todo: object) {
+      console.log(userId, todo);
       this.todoList.push(todo);
+      localStorage.setItem(this.userId, JSON.stringify(this.todoList));
+    },
+    getTodoList(userId: string) {
+      this.userId = userId;
+
+      const todoLists = localStorage.getItem(this.userId);
+      if (todoLists) {
+        this.todoList = JSON.parse(todoLists);
+      }
+      console.log(this.todoList);
+      return JSON.parse(todoLists);
     },
   },
 });
